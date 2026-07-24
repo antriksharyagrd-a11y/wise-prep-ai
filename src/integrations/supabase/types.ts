@@ -14,16 +14,291 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      daily_questions: {
+        Row: {
+          day: string
+          question_id: string
+        }
+        Insert: {
+          day: string
+          question_id: string
+        }
+        Update: {
+          day?: string
+          question_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_questions_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mock_interviews: {
+        Row: {
+          confidence_avg: number | null
+          created_at: string
+          id: string
+          role_domain: string
+          score: number | null
+          status: string
+          strengths: string[] | null
+          suggestions: string[] | null
+          summary: string | null
+          transcript: Json
+          updated_at: string
+          user_id: string
+          weaknesses: string[] | null
+        }
+        Insert: {
+          confidence_avg?: number | null
+          created_at?: string
+          id?: string
+          role_domain: string
+          score?: number | null
+          status?: string
+          strengths?: string[] | null
+          suggestions?: string[] | null
+          summary?: string | null
+          transcript?: Json
+          updated_at?: string
+          user_id: string
+          weaknesses?: string[] | null
+        }
+        Update: {
+          confidence_avg?: number | null
+          created_at?: string
+          id?: string
+          role_domain?: string
+          score?: number | null
+          status?: string
+          strengths?: string[] | null
+          suggestions?: string[] | null
+          summary?: string | null
+          transcript?: Json
+          updated_at?: string
+          user_id?: string
+          weaknesses?: string[] | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          dark_mode: boolean
+          display_name: string | null
+          id: string
+          target_role: string | null
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          dark_mode?: boolean
+          display_name?: string | null
+          id: string
+          target_role?: string | null
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          dark_mode?: boolean
+          display_name?: string | null
+          id?: string
+          target_role?: string | null
+          updated_at?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      question_attempts: {
+        Row: {
+          ai_explanation: string | null
+          code: string
+          created_at: string
+          id: string
+          language: string
+          question_id: string
+          solved: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_explanation?: string | null
+          code?: string
+          created_at?: string
+          id?: string
+          language?: string
+          question_id: string
+          solved?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_explanation?: string | null
+          code?: string
+          created_at?: string
+          id?: string
+          language?: string
+          question_id?: string
+          solved?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "question_attempts_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      questions: {
+        Row: {
+          created_at: string
+          description: string
+          difficulty: Database["public"]["Enums"]["difficulty"]
+          examples: Json
+          hints: string[] | null
+          id: string
+          slug: string
+          starter_code: Json
+          title: string
+          topic: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          difficulty: Database["public"]["Enums"]["difficulty"]
+          examples?: Json
+          hints?: string[] | null
+          id?: string
+          slug: string
+          starter_code?: Json
+          title: string
+          topic: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          difficulty?: Database["public"]["Enums"]["difficulty"]
+          examples?: Json
+          hints?: string[] | null
+          id?: string
+          slug?: string
+          starter_code?: Json
+          title?: string
+          topic?: string
+        }
+        Relationships: []
+      }
+      resumes: {
+        Row: {
+          ats_score: number | null
+          created_at: string
+          extracted_text: string | null
+          feedback: Json | null
+          file_name: string
+          id: string
+          target_role: string | null
+          user_id: string
+        }
+        Insert: {
+          ats_score?: number | null
+          created_at?: string
+          extracted_text?: string | null
+          feedback?: Json | null
+          file_name: string
+          id?: string
+          target_role?: string | null
+          user_id: string
+        }
+        Update: {
+          ats_score?: number | null
+          created_at?: string
+          extracted_text?: string | null
+          feedback?: Json | null
+          file_name?: string
+          id?: string
+          target_role?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      streaks: {
+        Row: {
+          current_streak: number
+          last_active_date: string | null
+          longest_streak: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          current_streak?: number
+          last_active_date?: string | null
+          longest_streak?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          current_streak?: number
+          last_active_date?: string | null
+          longest_streak?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      bump_streak: { Args: { _user_id: string }; Returns: undefined }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      difficulty: "Easy" | "Medium" | "Hard"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +425,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      difficulty: ["Easy", "Medium", "Hard"],
+    },
   },
 } as const
