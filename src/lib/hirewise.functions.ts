@@ -183,7 +183,8 @@ export const finalizeInterview = createServerFn({ method: "POST" })
     const confidenceAvg = confidences.length ? confidences.reduce((a, b) => a + b, 0) / confidences.length : null;
     const gateway = createLovableAiGatewayProvider(getLovableApiKey());
     const { object } = await generateObject({
-      model: gateway("openai/gpt-5.5", { structuredOutputs: true }),
+      model: gateway("openai/gpt-5.5"),
+      mode: "json",
       schema: z.object({
         score: z.number().min(0).max(10),
         summary: z.string(),
@@ -222,7 +223,8 @@ export const analyzeResume = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const gateway = createLovableAiGatewayProvider(getLovableApiKey());
     const { object } = await generateObject({
-      model: gateway("openai/gpt-5.5", { structuredOutputs: true }),
+      model: gateway("openai/gpt-5.5"),
+      mode: "json",
       schema: z.object({
         ats_score: z.number().min(0).max(100),
         formatting: z.string(),
