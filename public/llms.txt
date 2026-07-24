@@ -1,0 +1,12 @@
+# HireWise
+
+> AI-powered interview preparation platform. Daily coding challenges, mock interviews with live confidence scoring, resume feedback, and a composite readiness score.
+
+HireWise helps engineers prepare for technical interviews with a curated question bank, AI mock interviewer, AI resume analysis, and progress tracking. Public profiles let candidates share their prep signal with recruiters.
+
+## Pages
+- [Home](/): Landing page with features and dashboard preview.
+- [Sign in](/auth): Sign in or create an account.
+
+## Optional
+- [Sitemap](/sitemap.xml)
