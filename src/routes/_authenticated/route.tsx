@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect, Link, useRouter } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { HireWiseLogo } from "@/components/HireWiseLogo";
-import { Code2, FileText, LayoutDashboard, LogOut, Mic, TrendingUp, User } from "lucide-react";
+import { Briefcase, FileText, LayoutDashboard, LogOut, PenTool, Sparkles, User } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -23,10 +23,9 @@ function AuthedShell() {
   }
   const nav = [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/question", label: "Daily Question", icon: Code2 },
-    { to: "/interview", label: "Mock Interview", icon: Mic },
-    { to: "/resume", label: "Resume", icon: FileText },
-    { to: "/progress", label: "Progress", icon: TrendingUp },
+    { to: "/resume", label: "Resume Analyzer", icon: Sparkles },
+    { to: "/resume-builder", label: "Resume Builder", icon: PenTool },
+    { to: "/job-match", label: "Job Match", icon: Briefcase },
     { to: "/profile", label: "Profile", icon: User },
   ] as const;
   return (
