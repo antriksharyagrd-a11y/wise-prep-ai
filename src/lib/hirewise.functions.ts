@@ -216,6 +216,26 @@ export const getInterview = createServerFn({ method: "GET" })
 
 // -------- Resume --------
 
+export const analyzeResumePublic = createServerFn({ method: "POST" })
+  .inputValidator((i: unknown) => z.object({ fileName: z.string(), extractedText: z.string().min(20), targetRole: z.string() }).parse(i))
+  .handler(async ({ data }) => {
+    const gateway = createLovableAiGatewayProvider(getLovableApiKey());
+    const { object } = await generateObject({
+      model: gateway("openai/gpt-5.5"),
+      schema: z.object({
+        ats_score: z.number().min(0).max(100),
+        formatting: z.string(),
+        keyword_match: z.string(),
+        missing_sections: z.array(z.string()).max(6),
+        strengths: z.array(z.string()).max(5),
+        improvements: z.array(z.string()).max(6),
+        summary: z.string(),
+      }),
+      prompt: `Evaluate this resume for a ${data.targetRole} role. Score ATS-friendliness 0-100 based on structure, keyword match to the target role, quantified impact, and machine parseability.\n\nRESUME:\n${data.extractedText.slice(0, 12000)}`,
+    });
+    return { id: null, feedback: object };
+  });
+
 export const analyzeResume = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => z.object({ fileName: z.string(), extractedText: z.string().min(20), targetRole: z.string() }).parse(i))

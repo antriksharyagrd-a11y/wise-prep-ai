@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { motion } from "framer-motion";
-import { ArrowRight, Briefcase, FileText, Layout, PenTool, Sparkles, Upload, Clipboard, Droplets, CheckCircle2, Download, User } from "lucide-react";
+import { ArrowRight, Briefcase, FileText, LayoutGrid as Layout, PenTool, Sparkles, Upload, Clipboard, Droplets, CircleCheck as CheckCircle2, Download, User } from "lucide-react";
 import { HireWiseLogo } from "@/components/HireWiseLogo";
 import { useState, useCallback, useRef, useEffect } from "react";
 import { toast } from "sonner";
-import { analyzeResume } from "@/lib/hirewise.functions";
+import { analyzeResumePublic } from "@/lib/hirewise.functions";
 
 const TARGET_ROLES = [
   { group: "Development", roles: ["Frontend Developer", "Backend Developer", "Full Stack Developer", "Software Engineer", "Software Developer", "Web Developer"] },
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
 });
 
 function ResumeUploader() {
-  const analyze = useServerFn(analyzeResume);
+  const analyze = useServerFn(analyzeResumePublic);
   const [file, setFile] = useState<File | null>(null);
   const [targetRole, setTargetRole] = useState("Frontend Engineer");
   const [roleInput, setRoleInput] = useState("Frontend Engineer");
