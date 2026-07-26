@@ -3,9 +3,9 @@ import { r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { O as isRedirect, v as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { c as createServerFn, i as TSS_SERVER_FUNCTION } from "./createServerFn-BFFE07zL.mjs";
 import { t as requireSupabaseAuth } from "./auth-middleware-BwdutfJC.mjs";
-import { J as numberType, X as stringType, Y as objectType, q as arrayType } from "../_libs/@ai-sdk/gateway+[...].mjs";
-import { t as getServerFnById } from "../__23tanstack-start-server-fn-resolver-4z7ia2nM.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/hirewise.functions-CJnCa-RI.js
+import { i as stringType, r as objectType } from "../_libs/zod.mjs";
+import { t as getServerFnById } from "../__23tanstack-start-server-fn-resolver-BCSYJ7Za.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/hirewise.functions-DBr4I3ML.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 function useServerFn(serverFn) {
 	const router = useRouter();
@@ -35,26 +35,6 @@ var createSsrRpc = (functionId) => {
 		[TSS_SERVER_FUNCTION]: true
 	});
 };
-objectType({
-	ats_score: numberType().min(0).max(100),
-	match_percentage: numberType().min(0).max(100),
-	matched_keywords: arrayType(stringType()).max(30),
-	missing_keywords: arrayType(stringType()).max(30),
-	skills_found: arrayType(stringType()).max(30),
-	skills_missing: arrayType(stringType()).max(30),
-	strengths: arrayType(stringType()).max(8),
-	improvements: arrayType(stringType()).max(8),
-	summary: stringType(),
-	section_feedback: objectType({
-		skills: stringType(),
-		experience: stringType(),
-		education: stringType(),
-		projects: stringType(),
-		formatting: stringType(),
-		contact_info: stringType()
-	}),
-	suggestions: arrayType(stringType()).max(10)
-});
 var analyzeResumePublic = createServerFn({ method: "POST" }).inputValidator((i) => objectType({
 	fileName: stringType(),
 	extractedText: stringType().min(20),

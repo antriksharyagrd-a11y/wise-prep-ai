@@ -1,5 +1,4 @@
-// Server-only helper for AI providers.
-// Never import from client code.
+// Server-only AI provider helpers. Never import from client code.
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 
 export function createLovableAiGatewayProvider(apiKey: string) {
@@ -16,25 +15,21 @@ export function getLovableApiKey(): string {
   return key;
 }
 
-// Gemini provider via Google's OpenAI-compatible endpoint.
+// Gemini via Google's OpenAI-compatible REST endpoint.
+// The API key is passed as a Bearer token (Authorization header).
 export function createGeminiProvider(apiKey: string) {
   return createOpenAICompatible({
     name: "gemini",
-    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
-    headers: { Authorization: `Bearer ${apiKey}` },
+    baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
   });
 }
 
-export function getGeminiApiKey(): string {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error("Missing GEMINI_API_KEY");
-  return key;
-}
-
-// Resolve the active AI provider, preferring Gemini when configured.
+// Returns whichever provider is configured, preferring Gemini.
 export function createAiProvider() {
-  if (process.env.GEMINI_API_KEY) {
-    return createGeminiProvider(process.env.GEMINI_API_KEY);
-  }
+  const geminiKey = process.env.GEMINI_API_KEY;
+  if (geminiKey) return createGeminiProvider(geminiKey);
   return createLovableAiGatewayProvider(getLovableApiKey());
 }

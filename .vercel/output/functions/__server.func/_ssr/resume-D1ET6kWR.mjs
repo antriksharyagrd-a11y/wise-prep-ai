@@ -2,9 +2,9 @@ import { o as __toESM } from "../_runtime.mjs";
 import { i as require_jsx_runtime, r as require_react } from "../_libs/react+tanstack__react-query.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
 import { t as motion } from "../_libs/framer-motion.mjs";
-import { a as useServerFn, t as analyzeResume } from "./hirewise.functions-CJnCa-RI.mjs";
+import { a as useServerFn, t as analyzeResume } from "./hirewise.functions-DBr4I3ML.mjs";
 import { a as Percent, c as Droplets, d as CircleCheck, f as Briefcase, i as Sparkles, l as Clipboard, n as Upload, r as Target, s as FileText, u as Circle } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/resume-DNom68vS.js
+//#region node_modules/.nitro/vite/services/ssr/assets/resume-D1ET6kWR.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var TARGET_ROLES = [
