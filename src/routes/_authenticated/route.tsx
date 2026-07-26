@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect, Link, useRouter } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { HireWiseLogo } from "@/components/HireWiseLogo";
-import { Briefcase, FileText, LayoutDashboard, LogOut, PenTool, Sparkles, User } from "lucide-react";
+import { Sparkles, LogOut, User } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated")({
@@ -22,17 +22,14 @@ function AuthedShell() {
     router.navigate({ to: "/" });
   }
   const nav = [
-    { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/resume", label: "Resume Analyzer", icon: Sparkles },
-    { to: "/resume-builder", label: "Resume Builder", icon: PenTool },
-    { to: "/job-match", label: "Job Match", icon: Briefcase },
+    { to: "/resume", label: "ATS Analyzer", icon: Sparkles },
     { to: "/profile", label: "Profile", icon: User },
   ] as const;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <nav className="fixed top-0 z-40 w-full border-b border-white/5 glass">
         <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6">
-          <Link to="/dashboard"><HireWiseLogo /></Link>
+          <Link to="/resume"><HireWiseLogo /></Link>
           <div className="hidden md:flex items-center gap-1">
             {nav.map((n) => (
               <Link key={n.to} to={n.to} className="px-3 h-8 inline-flex items-center gap-1.5 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors [&.active]:text-foreground [&.active]:bg-white/5" activeProps={{ className: "active" }}>

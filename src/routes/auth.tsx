@@ -10,7 +10,7 @@ export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
       { title: "Sign in — HireWise" },
-      { name: "description", content: "Sign in or create your HireWise account for AI resume analysis, resume builder, job match, and personal dashboard." },
+      { name: "description", content: "Sign in or create your HireWise account to analyze your resume against any job description." },
       { property: "og:title", content: "Sign in — HireWise" },
       { property: "og:description", content: "Sign in to your HireWise AI Resume & ATS account." },
     ],
@@ -30,12 +30,12 @@ function AuthPage() {
     let mounted = true;
     // Initial session check
     supabase.auth.getSession().then(({ data }) => {
-      if (mounted && data.session) nav({ to: "/dashboard" });
+      if (mounted && data.session) nav({ to: "/resume" });
     });
     // Real-time listener: redirect as soon as session appears (e.g. after signup auto-sign-in)
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       if (mounted && (event === "SIGNED_IN" || event === "SIGNED_UP") && session) {
-        nav({ to: "/dashboard" });
+        nav({ to: "/resume" });
       }
     });
     return () => {
@@ -82,7 +82,7 @@ function AuthPage() {
       if (!sessionCheck.session) {
         throw new Error("Session could not be established. Please sign in manually.");
       }
-      nav({ to: "/dashboard" });
+      nav({ to: "/resume" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Auth failed");
     } finally {
@@ -94,7 +94,7 @@ function AuthPage() {
     const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
     if (result.error) { toast.error("Google sign-in failed"); return; }
     if (result.redirected) return;
-    nav({ to: "/dashboard" });
+    nav({ to: "/resume" });
   }
 
   return (
@@ -104,7 +104,7 @@ function AuthPage() {
         <Link to="/" className="flex justify-center mb-8"><HireWiseLogo /></Link>
         <div className="glass rounded-2xl p-6 shadow-glow">
           <h1 className="text-xl font-medium tracking-tight">{mode === "signin" ? "Welcome back" : "Create your account"}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{mode === "signin" ? "Sign in to access your resumes." : "Start building better resumes in under a minute."}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{mode === "signin" ? "Sign in to analyze your resume." : "Start analyzing your resume in under a minute."}</p>
 
           <button onClick={google} className="mt-6 w-full h-10 inline-flex items-center justify-center gap-2 rounded-md bg-white text-navy-950 text-sm font-medium hover:bg-white/90 transition-colors">
             <svg viewBox="0 0 24 24" className="size-4"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.76h3.56c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.56-2.76c-.98.66-2.24 1.06-3.72 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.11a6.6 6.6 0 0 1 0-4.22V7.05H2.18a11 11 0 0 0 0 9.9l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.2 1.65l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.05l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>

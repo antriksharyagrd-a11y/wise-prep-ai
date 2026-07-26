@@ -13,13 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedJobMatchRouteImport } from './routes/_authenticated/job-match'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedResumeRouteImport } from './routes/_authenticated/resume'
-import { Route as AuthenticatedResumeBuilderRouteImport } from './routes/_authenticated/resume-builder'
-import { Route as UUsernameRouteImport } from './routes/u.$username'
-import { Route as ApiPublicHooksDailyReminderRouteImport } from './routes/api/public/hooks/daily-reminder'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,16 +35,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedJobMatchRoute = AuthenticatedJobMatchRouteImport.update({
-  id: '/job-match',
-  path: '/job-match',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -60,47 +45,20 @@ const AuthenticatedResumeRoute = AuthenticatedResumeRouteImport.update({
   path: '/resume',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedResumeBuilderRoute =
-  AuthenticatedResumeBuilderRouteImport.update({
-    id: '/resume-builder',
-    path: '/resume-builder',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const UUsernameRoute = UUsernameRouteImport.update({
-  id: '/u/$username',
-  path: '/u/$username',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiPublicHooksDailyReminderRoute =
-  ApiPublicHooksDailyReminderRouteImport.update({
-    id: '/api/public/hooks/daily-reminder',
-    path: '/api/public/hooks/daily-reminder',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
-  '/job-match': typeof AuthenticatedJobMatchRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/resume': typeof AuthenticatedResumeRoute
-  '/resume-builder': typeof AuthenticatedResumeBuilderRoute
-  '/u/$username': typeof UUsernameRoute
-  '/api/public/hooks/daily-reminder': typeof ApiPublicHooksDailyReminderRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
-  '/job-match': typeof AuthenticatedJobMatchRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/resume': typeof AuthenticatedResumeRoute
-  '/resume-builder': typeof AuthenticatedResumeBuilderRoute
-  '/u/$username': typeof UUsernameRoute
-  '/api/public/hooks/daily-reminder': typeof ApiPublicHooksDailyReminderRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -108,52 +66,22 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
-  '/_authenticated/job-match': typeof AuthenticatedJobMatchRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/resume': typeof AuthenticatedResumeRoute
-  '/_authenticated/resume-builder': typeof AuthenticatedResumeBuilderRoute
-  '/u/$username': typeof UUsernameRoute
-  '/api/public/hooks/daily-reminder': typeof ApiPublicHooksDailyReminderRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/auth'
-    | '/sitemap.xml'
-    | '/dashboard'
-    | '/job-match'
-    | '/profile'
-    | '/resume'
-    | '/resume-builder'
-    | '/u/$username'
-    | '/api/public/hooks/daily-reminder'
+  fullPaths: '/' | '/auth' | '/sitemap.xml' | '/profile' | '/resume'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/auth'
-    | '/sitemap.xml'
-    | '/dashboard'
-    | '/job-match'
-    | '/profile'
-    | '/resume'
-    | '/resume-builder'
-    | '/u/$username'
-    | '/api/public/hooks/daily-reminder'
+  to: '/' | '/auth' | '/sitemap.xml' | '/profile' | '/resume'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/sitemap.xml'
-    | '/_authenticated/dashboard'
-    | '/_authenticated/job-match'
     | '/_authenticated/profile'
     | '/_authenticated/resume'
-    | '/_authenticated/resume-builder'
-    | '/u/$username'
-    | '/api/public/hooks/daily-reminder'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -161,8 +89,6 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  UUsernameRoute: typeof UUsernameRoute
-  ApiPublicHooksDailyReminderRoute: typeof ApiPublicHooksDailyReminderRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -195,20 +121,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/job-match': {
-      id: '/_authenticated/job-match'
-      path: '/job-match'
-      fullPath: '/job-match'
-      preLoaderRoute: typeof AuthenticatedJobMatchRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
@@ -223,44 +135,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedResumeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/resume-builder': {
-      id: '/_authenticated/resume-builder'
-      path: '/resume-builder'
-      fullPath: '/resume-builder'
-      preLoaderRoute: typeof AuthenticatedResumeBuilderRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/u/$username': {
-      id: '/u/$username'
-      path: '/u/$username'
-      fullPath: '/u/$username'
-      preLoaderRoute: typeof UUsernameRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/public/hooks/daily-reminder': {
-      id: '/api/public/hooks/daily-reminder'
-      path: '/api/public/hooks/daily-reminder'
-      fullPath: '/api/public/hooks/daily-reminder'
-      preLoaderRoute: typeof ApiPublicHooksDailyReminderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-  AuthenticatedJobMatchRoute: typeof AuthenticatedJobMatchRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedResumeRoute: typeof AuthenticatedResumeRoute
-  AuthenticatedResumeBuilderRoute: typeof AuthenticatedResumeBuilderRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-  AuthenticatedJobMatchRoute: AuthenticatedJobMatchRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedResumeRoute: AuthenticatedResumeRoute,
-  AuthenticatedResumeBuilderRoute: AuthenticatedResumeBuilderRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -271,8 +156,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  UUsernameRoute: UUsernameRoute,
-  ApiPublicHooksDailyReminderRoute: ApiPublicHooksDailyReminderRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
