@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { generateObject } from "ai";
 import { z } from "zod";
-import { createLovableAiGatewayProvider, getLovableApiKey } from "./ai-gateway.server";
+import { createAiProvider } from "./ai-gateway.server";
 
 const atsSchema = z.object({
   ats_score: z.number().min(0).max(100),
@@ -60,9 +60,9 @@ export const analyzeResumePublic = createServerFn({ method: "POST" })
     }).parse(i),
   )
   .handler(async ({ data }) => {
-    const gateway = createLovableAiGatewayProvider(getLovableApiKey());
+    const provider = createAiProvider();
     const { object } = await generateObject({
-      model: gateway("openai/gpt-5.5"),
+      model: provider("gemini-2.5-flash"),
       schema: atsSchema,
       prompt: buildPrompt(data.extractedText, data.targetRole, data.jobDescription),
     });
@@ -80,9 +80,9 @@ export const analyzeResume = createServerFn({ method: "POST" })
     }).parse(i),
   )
   .handler(async ({ data, context }) => {
-    const gateway = createLovableAiGatewayProvider(getLovableApiKey());
+    const provider = createAiProvider();
     const { object } = await generateObject({
-      model: gateway("openai/gpt-5.5"),
+      model: provider("gemini-2.5-flash"),
       schema: atsSchema,
       prompt: buildPrompt(data.extractedText, data.targetRole, data.jobDescription),
     });

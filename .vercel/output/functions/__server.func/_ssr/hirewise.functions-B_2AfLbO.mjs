@@ -3,7 +3,7 @@ import { t as requireSupabaseAuth } from "./auth-middleware-BwdutfJC.mjs";
 import { J as numberType, X as stringType, Y as objectType, q as arrayType } from "../_libs/@ai-sdk/gateway+[...].mjs";
 import { t as generateObject } from "../_libs/ai.mjs";
 import { t as createOpenAICompatible } from "../_libs/ai-sdk__openai-compatible.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/hirewise.functions-CsRVK3-9.js
+//#region node_modules/.nitro/vite/services/ssr/assets/hirewise.functions-B_2AfLbO.js
 var createServerRpc = (serverFnMeta, splitImportFn) => {
 	const url = "/_serverFn/" + serverFnMeta.id;
 	return Object.assign(splitImportFn, {
@@ -23,6 +23,17 @@ function getLovableApiKey() {
 	const key = process.env.LOVABLE_API_KEY;
 	if (!key) throw new Error("Missing LOVABLE_API_KEY");
 	return key;
+}
+function createGeminiProvider(apiKey) {
+	return createOpenAICompatible({
+		name: "gemini",
+		baseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
+		headers: { Authorization: `Bearer ${apiKey}` }
+	});
+}
+function createAiProvider() {
+	if (process.env.GEMINI_API_KEY) return createGeminiProvider(process.env.GEMINI_API_KEY);
+	return createLovableAiGatewayProvider(getLovableApiKey());
 }
 var atsSchema = objectType({
 	ats_score: numberType().min(0).max(100),
@@ -76,7 +87,7 @@ var analyzeResumePublic = createServerFn({ method: "POST" }).inputValidator((i) 
 	jobDescription: stringType().optional().default("")
 }).parse(i)).handler(analyzeResumePublic_createServerFn_handler, async ({ data }) => {
 	const { object } = await generateObject({
-		model: createLovableAiGatewayProvider(getLovableApiKey())("openai/gpt-5.5"),
+		model: createAiProvider()("gemini-2.5-flash"),
 		schema: atsSchema,
 		prompt: buildPrompt(data.extractedText, data.targetRole, data.jobDescription)
 	});
@@ -97,7 +108,7 @@ var analyzeResume = createServerFn({ method: "POST" }).middleware([requireSupaba
 	jobDescription: stringType().optional().default("")
 }).parse(i)).handler(analyzeResume_createServerFn_handler, async ({ data, context }) => {
 	const { object } = await generateObject({
-		model: createLovableAiGatewayProvider(getLovableApiKey())("openai/gpt-5.5"),
+		model: createAiProvider()("gemini-2.5-flash"),
 		schema: atsSchema,
 		prompt: buildPrompt(data.extractedText, data.targetRole, data.jobDescription)
 	});

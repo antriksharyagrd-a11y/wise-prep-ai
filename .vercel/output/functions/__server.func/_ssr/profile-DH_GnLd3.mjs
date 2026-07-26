@@ -1,8 +1,8 @@
 import { o as __toESM } from "../_runtime.mjs";
 import { i as require_jsx_runtime, r as require_react, t as useQuery } from "../_libs/react+tanstack__react-query.mjs";
 import { n as toast } from "../_libs/sonner.mjs";
-import { a as useServerFn, i as updateProfile, r as getDashboard } from "./hirewise.functions-BaGxhchm.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/profile-BD-dqS09.js
+import { a as useServerFn, i as updateProfile, r as getDashboard } from "./hirewise.functions-CJnCa-RI.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/profile-DH_GnLd3.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function ProfilePage() {

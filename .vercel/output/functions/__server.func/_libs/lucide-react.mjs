@@ -160,22 +160,12 @@ var CircleCheck = createLucideIcon("circle-check", [["circle", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var CircleX = createLucideIcon("circle-x", [
-	["circle", {
-		cx: "12",
-		cy: "12",
-		r: "10",
-		key: "1mglay"
-	}],
-	["path", {
-		d: "m15 9-6 6",
-		key: "1uzhvr"
-	}],
-	["path", {
-		d: "m9 9 6 6",
-		key: "z0biqf"
-	}]
-]);
+var Circle = createLucideIcon("circle", [["circle", {
+	cx: "12",
+	cy: "12",
+	r: "10",
+	key: "1mglay"
+}]]);
 /**
 * @license lucide-react v0.575.0 - ISC
 *
@@ -370,4 +360,4 @@ var User = createLucideIcon("user", [["path", {
 	key: "17ys0d"
 }]]);
 //#endregion
-export { Percent as a, Droplets as c, CircleCheck as d, Briefcase as f, Sparkles as i, Clipboard as l, Upload as n, LogOut as o, ArrowRight as p, Target as r, FileText as s, User as t, CircleX as u };
+export { Percent as a, Droplets as c, CircleCheck as d, Briefcase as f, Sparkles as i, Clipboard as l, Upload as n, LogOut as o, ArrowRight as p, Target as r, FileText as s, User as t, Circle as u };

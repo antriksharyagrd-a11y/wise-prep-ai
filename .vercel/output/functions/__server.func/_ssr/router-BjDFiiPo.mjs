@@ -4,7 +4,7 @@ import { i as require_jsx_runtime, n as QueryClientProvider, r as require_react 
 import { c as HeadContent, d as Outlet, f as lazyRouteComponent, h as Link, j as redirect, m as createRootRouteWithContext, p as createFileRoute, s as Scripts, u as createRouter, v as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { t as Toaster } from "../_libs/sonner.mjs";
 import { t as QueryClient } from "../_libs/tanstack__query-core.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-CxeB_h-M.js
+//#region node_modules/.nitro/vite/services/ssr/assets/router-BjDFiiPo.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var styles_default = "/assets/styles-CyT5P1e8.css";
@@ -184,7 +184,7 @@ function RootComponent() {
 		})]
 	});
 }
-var $$splitComponentImporter$4 = () => import("./routes-cRzLMu7U.mjs");
+var $$splitComponentImporter$4 = () => import("./routes-tThLAaGH.mjs");
 var Route$5 = createFileRoute("/")({
 	head: () => ({ meta: [
 		{ title: "HireWise — ATS Resume Analyzer" },
@@ -253,7 +253,7 @@ var Route$2 = createFileRoute("/sitemap.xml")({ server: { handlers: { GET: async
 		"Cache-Control": "public, max-age=3600"
 	} });
 } } } });
-var $$splitComponentImporter$1 = () => import("./profile-BD-dqS09.mjs");
+var $$splitComponentImporter$1 = () => import("./profile-DH_GnLd3.mjs");
 var Route$1 = createFileRoute("/_authenticated/profile")({
 	head: () => ({ meta: [{ title: "Profile — HireWise" }, {
 		name: "description",
@@ -261,7 +261,7 @@ var Route$1 = createFileRoute("/_authenticated/profile")({
 	}] }),
 	component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-var $$splitComponentImporter = () => import("./resume-SCH5EgoS.mjs");
+var $$splitComponentImporter = () => import("./resume-DNom68vS.mjs");
 var Route = createFileRoute("/_authenticated/resume")({
 	head: () => ({ meta: [{ title: "ATS Resume Analyzer — HireWise" }, {
 		name: "description",
